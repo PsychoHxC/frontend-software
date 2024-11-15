@@ -1,0 +1,76 @@
+<div
+  class="container-fluid d-flex justify-content-center align-items-center"
+  style="height: 100vh; background-color: rgb(230, 213, 190)"
+>
+  <div
+    class="login-box"
+    style="background-color: rgb(75, 131, 235); border-radius: 3%"
+  >
+    <div class="login-logo">
+      <a href="" style="color: rgb(197, 84, 19)"><b>Talen-link</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div
+        class="card-body login-card-body"
+        style="background-color: rgb(211, 211, 211)"
+      >
+        <p class="login-box-msg">Iniciar sesión</p>
+
+        <form>
+          <div class="input-group mb-3">
+            <input type="email" id="email" class="form-control" placeholder="Correo" [(ngModel)]="email" name="email"/>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" id="clave" class="form-control" placeholder="Contraseña" [(ngModel)]="clave" name="clave"/>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <span style="color: red;">Email o contraseña incorrecto</span>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember" />
+                <label for="remember"> Recuerdame </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <button class="btn btn-primary btn-block" (click)="consulta('')">
+                Ingresar
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!--<div class="social-auth-links text-center mb-3">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+        </a>
+      </div>-->
+        <!-- /.social-auth-links -->
+
+        <!-- <p class="mb-1">
+        <a href="forgot-password.html">I forgot my password</a>
+      </p>
+      <p class="mb-0">
+        <a href="register.html" class="text-center">Register a new membership</a>
+      </p>-->
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</div>

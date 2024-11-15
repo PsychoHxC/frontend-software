@@ -1,0 +1,51 @@
+<!-- Content Header (Page header) -->
+
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Categorias</h1>
+      </div>
+    
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item active">Dashboard v1</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <hr>
+    <input type="button" value = "Insertar Categoria" class="btn btn-warning">
+    <div id="formulario"></div>
+    <div id="tabla">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+
+          <div class="table.responsive">
+            <table class="table">
+              <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+              <tr *ngFor="let item of categoria">
+                <td>{{item.nombre}}</td>
+                <td>
+                  <span class="fas fa-edit" style="color:black; cursor: pointer" title="Editar"></span>
+                  <span class="fas fa-minus-square" style="color:red; cursor: pointer" title="Eliminar" (click)="eliminar(item.id_solicitud)"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+

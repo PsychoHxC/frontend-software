@@ -1,55 +1,53 @@
-import { Component } from '@angular/core';
+
+
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 import { GerenciaService } from 'src/app/servicios/gerencia.service';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
   styleUrls: ['./categorias.component.scss']
 })
-export class CategoriasComponent {
+export class CategoriasComponent implements AfterViewInit {
+  // Columnas que se mostrarán en la tabla
+  displayedColumns: string[] = ['numero_oferta', 'nombre_oferta', 'fecha_fin_oferta', 'detalle_oferta', 'acciones'];
+  // Fuente de datos para la tabla
+  dataSource = new MatTableDataSource<any>();
+  // Referencia al paginador
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  categoria:any;
+  constructor(private gerenciaService: GerenciaService) {}
 
-  constructor(private scate:GerenciaService){}
-
-  ngOnInit(): void{
-    this.consulta()
+  ngOnInit(): void {
+    this.cargarOfertas(); // Cargar las ofertas al inicializar el componente
   }
 
-  consulta(){
-    this.scate.consultar().subscribe((res:any)=>{
-
-      this.categoria =res;
-    })
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator; // Conectar el paginador
   }
 
-  eliminar(id:number){
+  // Consultar las ofertas desde el servicio
+  cargarOfertas(): void {
 
-    Swal.fire({
-      title: "Esta seguro?",
-      text: "No podras revertir la decisión!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, Eliminar!",
-      cancelButtonText: "Cancelar"
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        this.scate.eliminar(id).subscribe((resp:any) =>{
-          if (resp['resultados']== 'OK'){
-            this.consulta();
-          }
-        })
-
-        Swal.fire({
-          title: "Eliminado!",
-          text: "A sido eliminado con exito.",
-          icon: "success"
-        });
-      }
-    });
   }
 
+  // Crear una nueva oferta
+  nuevaOferta(): void {
+    Swal.fire('Nueva Oferta', 'Esta funcionalidad está en desarrollo.', 'info');
+  }
+
+  // Editar una oferta
+  editarOferta(){
+
+  }
+
+  // Eliminar una oferta
+  eliminarOferta(){
+
+  }
 }
+

@@ -1,25 +1,76 @@
 <!-- Content Header (Page header) -->
-
 <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0">Recursos humanos</h1>
-        </div>
-        
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-            <li class="breadcrumb-item active">Recursos humanos</li>
-          </ol>
-        </div>
-        
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Recursos Humanos</h1>
       </div>
-   
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item active">Recursos Humanos</li>
+        </ol>
+      </div>
     </div>
-   
   </div>
-  
-  <section class="content">
-    <div class="container-fluid"></div>
-  </section>
+</div>
+
+<!-- Tabla de Recursos Humanos -->
+<section class="content">
+  <div class="container-fluid">
+    
+    <div *ngIf="dataSource.data.length > 0" class="table-container mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <!-- Nombre -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
+
+        <!-- Puesto -->
+        <ng-container matColumnDef="puesto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Puesto</th>
+          <td mat-cell *matCellDef="let element">{{ element.puesto }}</td>
+        </ng-container>
+
+        <!-- Acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editarRecurso(element)">
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+              </button>
+              <button mat-menu-item (click)="eliminarRecurso()">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <!-- Filas -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!-- Paginador -->
+      <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" aria-label="Paginador"></mat-paginator>
+    </div>
+
+    <!-- Mensaje de vacío -->
+    <div *ngIf="dataSource.data.length === 0" class="empty-state">
+      <p>No hay datos disponibles.</p>
+    </div>
+  </div>
+</section>

@@ -26,5 +26,11 @@ export class AreaService {
   filtro(dato:any){
     return this.http.get(`${this.url}?control=filtro&dato=${dato}`)
   }
+
+  aprobarSolicitud(id: number, idAprobacion: number) {
+    const body = { id_aprobacion: idAprobacion };
+    return this.http.put(`${this.url}?control=aprobar&id=${id}`, JSON.stringify(body));
+  }
+  
   
 }

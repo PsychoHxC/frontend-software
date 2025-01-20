@@ -17,10 +17,28 @@ import { ListadoDeElegiblesComponent } from './modulos/listado-de-elegibles/list
 import { CapacitacionesComponent } from './modulos/capacitaciones/capacitaciones.component';
 import { JuridicaComponent } from './modulos/juridica/juridica.component';
 import { RecursosHumanosComponent } from './modulos/recursos-humanos/recursos-humanos.component';
-import { PreguntasFrecuentesComponent } from './modulos/preguntas-frecuentes/preguntas-frecuentes.component';
+import { AreaComponent } from './modulos/preguntas-frecuentes/preguntas-frecuentes.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CrearSolicitudComponent } from './modulos/preguntas-frecuentes/crear-solicitud/crear-solicitud.component';
+import { CrearOfertaComponent } from './modulos/clientes/crear-oferta/crear-oferta.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -39,15 +57,32 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CapacitacionesComponent,
     JuridicaComponent,
     RecursosHumanosComponent,
-    PreguntasFrecuentesComponent,
+    AreaComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CrearSolicitudComponent,
+    CrearOfertaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    ReactiveFormsModule, 
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

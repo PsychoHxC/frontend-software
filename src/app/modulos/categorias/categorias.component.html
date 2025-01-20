@@ -1,51 +1,80 @@
-<!-- Content Header (Page header) -->
-
-<div class="content-header">
+<section class="content">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Categorias</h1>
+        <h1 class="m-0">Ofertas</h1>
       </div>
-    
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-          <li class="breadcrumb-item active">Dashboard v1</li>
+          <li class="breadcrumb-item active">Ofertas</li>
         </ol>
       </div>
     </div>
-  </div>
-</div>
 
-<section class="content">
-  <div class="container-fluid">
     <hr>
-    <input type="button" value = "Insertar Categoria" class="btn btn-warning">
-    <div id="formulario"></div>
-    <div id="tabla">
-      <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10">
+    <div class="center">
+      <button mat-raised-button color="primary" (click)="nuevaOferta()">Nueva Oferta</button>
+    </div>
 
-          <div class="table.responsive">
-            <table class="table">
-              <tr>
-                <th>Nombre</th>
-                <th>Acciones</th>
-              </tr>
-              <tr *ngFor="let item of categoria">
-                <td>{{item.nombre}}</td>
-                <td>
-                  <span class="fas fa-edit" style="color:black; cursor: pointer" title="Editar"></span>
-                  <span class="fas fa-minus-square" style="color:red; cursor: pointer" title="Eliminar" (click)="eliminar(item.id_solicitud)"></span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div class="col-lg-1"></div>
-      </div>
+    <div *ngIf="dataSource.data.length > 0" class="table-container mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <!-- Número de Oferta -->
+        <ng-container matColumnDef="numero_oferta">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Número</th>
+          <td mat-cell *matCellDef="let element">{{ element.numero_oferta }}</td>
+        </ng-container>
+
+        <!-- Nombre de Oferta -->
+        <ng-container matColumnDef="nombre_oferta">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre_oferta }}</td>
+        </ng-container>
+
+        <!-- Fecha Fin Oferta -->
+        <ng-container matColumnDef="fecha_fin_oferta">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Fin</th>
+          <td mat-cell *matCellDef="let element">{{ element.fecha_fin_oferta | date }}</td>
+        </ng-container>
+
+        <!-- Detalle de Oferta -->
+        <ng-container matColumnDef="detalle_oferta">
+          <th mat-header-cell *matHeaderCellDef>Detalle</th>
+          <td mat-cell *matCellDef="let element">{{ element.detalle_oferta }}</td>
+        </ng-container>
+
+        <!-- Acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Más acciones">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editarOferta()">
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+              </button>
+              <button mat-menu-item (click)="eliminarOferta()">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <!-- Filas -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!-- Paginador -->
+      <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" aria-label="Paginador"></mat-paginator>
+    </div>
+
+    <!-- Mensaje de vacío -->
+    <div *ngIf="dataSource.data.length === 0" class="empty-state">
+      <p>No hay ofertas registradas.</p>
     </div>
   </div>
 </section>
-

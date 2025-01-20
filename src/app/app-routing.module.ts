@@ -9,7 +9,7 @@ import { ListadoDeElegiblesComponent } from './modulos/listado-de-elegibles/list
 import { CapacitacionesComponent } from './modulos/capacitaciones/capacitaciones.component';
 import { JuridicaComponent } from './modulos/juridica/juridica.component';
 import { RecursosHumanosComponent } from './modulos/recursos-humanos/recursos-humanos.component';
-import { PreguntasFrecuentesComponent } from './modulos/preguntas-frecuentes/preguntas-frecuentes.component';
+import { AreaComponent} from './modulos/preguntas-frecuentes/preguntas-frecuentes.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { validaruserGuard } from './guard/validaruser.guard';
@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: 'Capacitaciones', component: CapacitacionesComponent, canActivate:[validaruserGuard] },
       { path: 'Jurídica', component: JuridicaComponent, canActivate:[validaruserGuard] },
       { path: 'Recursos humanos', component: RecursosHumanosComponent, canActivate:[validaruserGuard] },
-      { path: 'Preguntas frecuentes', component: PreguntasFrecuentesComponent, canActivate:[validaruserGuard] },
+      { path: 'Preguntas frecuentes', component: AreaComponent, canActivate:[validaruserGuard] },
     ],
   },
   {path: 'login', component: LoginComponent},

@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Crear Solicitud</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nombre Área</mat-label>
+    <mat-select [(ngModel)]="idArea">
+      <mat-option value="Area 1">Área 1</mat-option>
+      <mat-option value="Área 2">Área 2</mat-option>
+      <mat-option value="Área 3">Área 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Nombre Jefe de Área</mat-label>
+    <input matInput [(ngModel)]="nombreJefe" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Solicitud Personal</mat-label>
+    <textarea matInput [(ngModel)]="solicitudPersonal"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

@@ -1,50 +1,8 @@
 
-// import { Component } from '@angular/core';
-// import { MatDialogRef } from '@angular/material/dialog';
-// import { AreaService } from 'src/app/servicios/area.service';
-
-// @Component({
-//   selector: 'app-crear-solicitud',
-//   templateUrl: './crear-solicitud.component.html',
-//   styleUrls: ['./crear-solicitud.component.scss']
-// })
-// export class CrearSolicitudComponent {
-//   idArea = ''; 
-//   nombreJefe = ''; 
-//   solicitudPersonal = ''; 
-
-//   constructor(
-//     public dialogRef: MatDialogRef<CrearSolicitudComponent>,
-//     private areaService: AreaService
-//   ) {}
-
-//   guardar() {
-//     const solicitud = {
-//       nombre_area: this.idArea,
-//       jefe_area: this.nombreJefe,
-//       solicitud_personal: this.solicitudPersonal
-//     };
-  
-//     this.areaService.insertar(solicitud).subscribe(
-//       (response) => {
-//         console.log('Solicitud guardada:', response);
-//         this.dialogRef.close(solicitud); // Cierra el modal después de guardar
-//       },
-//       (error) => {
-//         console.error('Error al guardar la solicitud:', error);
-//       }
-//     );
-//   }
-  
-
-//   cancelar(): void {
-//     this.dialogRef.close(); 
-//   }
-// }
-
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AreaService } from 'src/app/servicios/area.service';
+import { NombreAreaService } from 'src/app/servicios/nombre-area';
 
 @Component({
   selector: 'app-crear-solicitud',
@@ -52,19 +10,41 @@ import { AreaService } from 'src/app/servicios/area.service';
   styleUrls: ['./crear-solicitud.component.scss']
 })
 export class CrearSolicitudComponent {
-  idArea: string;
+  idArea?: string;
   nombreJefe: string;
   solicitudPersonal: string;
+
+  listaAreas: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CrearSolicitudComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, // Datos recibidos del componente principal
-    private areaService: AreaService
-  ) {
+    private areaService: AreaService,
+    private nombreAreaService: NombreAreaService) {
+
     // Si hay datos (modo edición), precarga los valores
-    this.idArea = data?.nombre_area || '';
+    //this.idArea = data?.nombre_area || '';
     this.nombreJefe = data?.jefe_area || '';
     this.solicitudPersonal = data?.solicitud_personal || '';
+    console.log ('Hola ', this.data)
+  }
+
+  ngOnInit(): void {
+    // Cargar las áreas al iniciar el componente
+    this.nombreAreaService.consultarAreas().subscribe(
+      (data: any) => {
+        this.listaAreas = data; // Asignar las áreas a la lista
+
+        if (this.data?.nombre_area){
+
+          const areaSeleccionada = this.listaAreas.find(area => area.nombre_area === this.data.nombre_area);
+          this.idArea = areaSeleccionada?.id_area || '';
+        }
+      },
+      (error) => {
+        console.error('Error al cargar las áreas:', error);
+      }
+    );
   }
 
   guardar(): void {

@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,14 @@ export class AreaService {
   insertar(params:any){
     return this.http.post(`${this.url}?control=insertar`, JSON.stringify(params));
   }
-  editar(id:number, params:any){
-    return this.http.put(`${this.url}?control=editar&id=${id}`, JSON.stringify(params));
+  editar(id: number, params: any) {
+    return this.http.put(`${this.url}?control=editar&id=${id}`, JSON.stringify(params))
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error al editar:', error);
+          return throwError(() => new Error('No se pudo completar la operación. Verifica los datos.'));
+        })
+      );
   }
 
   filtro(dato:any){

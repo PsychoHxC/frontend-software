@@ -72,6 +72,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CrearSolicitudComponent } from './crear-solicitud/crear-solicitud.component';
 import { AreaService } from 'src/app/servicios/area.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-preguntas-frecuentes',
@@ -86,7 +87,9 @@ export class AreaComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(public dialog: MatDialog, private areaService: AreaService) {} 
+  constructor(public dialog: MatDialog, private areaService: AreaService,
+    private snackBar: MatSnackBar
+  ) {} 
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -94,17 +97,24 @@ export class AreaComponent implements AfterViewInit {
   }
 
 
-  cargarSolicitudes(): void {
-    this.areaService.consultar().subscribe(
-      (data: any) => {
-        this.solicitudes = data.filter((solicitud: any) => solicitud.id_aprobacion === null);
-        this.dataSource.data = this.solicitudes; 
-      },
-      (error) => {
-        console.error('Error al cargar las solicitudes:', error);
-      }
-    );
-  }
+  isLoading: boolean = true;
+  
+
+cargarSolicitudes(): void {
+  this.isLoading = true;
+  this.areaService.consultar().subscribe(
+    (data: any) => {
+      this.solicitudes = data.filter((solicitud: any) => solicitud.id_aprobacion === null);
+      this.dataSource.data = this.solicitudes;
+      this.isLoading = false; // Detener el indicador de carga
+      console.log('Datos cargados:', this.solicitudes);
+    },
+    (error) => {
+      console.error('Error al cargar las solicitudes:', error);
+      this.isLoading = false; // Detener el indicador incluso en caso de error
+    }
+  );
+}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CrearSolicitudComponent);
@@ -199,3 +209,6 @@ export class AreaComponent implements AfterViewInit {
   
   
 }
+
+
+

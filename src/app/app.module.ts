@@ -10,7 +10,7 @@ import { ContentComponent } from './estructura/content/content.component';
 import { FooterComponent } from './estructura/footer/footer.component';
 import { PrincipalComponent } from './estructura/principal.component';
 import { DashboardComponent } from './modulos/dashboard/dashboard.component';
-import { ClientesComponent } from './modulos/clientes/clientes.component';
+import { GerenciaComponent } from './modulos/clientes/clientes.component';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { PresentacionDePruebasComponent } from './modulos/presentacion-de-pruebas/presentacion-de-pruebas.component';
 import { ListadoDeElegiblesComponent } from './modulos/listado-de-elegibles/listado-de-elegibles.component';
@@ -53,7 +53,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FooterComponent,
     PrincipalComponent,
     DashboardComponent,
-    ClientesComponent,
+    GerenciaComponent,
     CategoriasComponent,
     PresentacionDePruebasComponent,
     ListadoDeElegiblesComponent,

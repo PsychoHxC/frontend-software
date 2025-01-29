@@ -5,14 +5,14 @@
       <div class="form-row">
         <mat-form-field appearance="outline">
           <mat-label>Número de Solicitud</mat-label>
-          <input matInput formControlName="numeroSolicitud"/>
+          <input matInput formControlName="id_solicitud"/>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Área</mat-label>
           <mat-select formControlName="area">
-            <mat-option *ngFor="let area of areas" [value]="area">
-              {{ area }}
+            <mat-option *ngFor="let area of listaAreas" [value]="area.id_area">
+              {{ area.nombre_area }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -20,15 +20,21 @@
 
       <div class="form-row">
         <mat-form-field appearance="outline">
-          <mat-label>Tipo de Solicitud</mat-label>
-          <input matInput formControlName="tipoSolicitud" />
+          <mat-label>Cargo</mat-label>
+          <input matInput formControlName="cargo" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Fecha de Ejecución</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fechaEjecucion" />
+          <mat-label>Fecha fin de la oferta</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaFinOferta" [matDatepickerFilter]="deshabilitarFechas" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="crearSolicitudForm.get('fechaFinOferta')?.hasError('required')">
+            La fecha es requerida.
+          </mat-error>
+          <mat-error *ngIf="crearSolicitudForm.get('fechaFinOferta')?.hasError('fechaInvalida')">
+            La fecha debe ser posterior a la actual.
+          </mat-error>
         </mat-form-field>
       </div>
 

@@ -10,9 +10,10 @@ import { NombreAreaService } from 'src/app/servicios/nombre-area';
   styleUrls: ['./crear-solicitud.component.scss']
 })
 export class CrearSolicitudComponent {
-  idArea?: string;
+  id_area?: string;
   nombreJefe: string;
   solicitudPersonal: string;
+  detalleSolicitud: string;
 
   listaAreas: any[] = [];
 
@@ -26,6 +27,7 @@ export class CrearSolicitudComponent {
     //this.idArea = data?.nombre_area || '';
     this.nombreJefe = data?.jefe_area || '';
     this.solicitudPersonal = data?.solicitud_personal || '';
+    this.detalleSolicitud = data?.detalle_solicitud || '';
     console.log ('Hola ', this.data)
   }
 
@@ -38,7 +40,7 @@ export class CrearSolicitudComponent {
         if (this.data?.nombre_area){
 
           const areaSeleccionada = this.listaAreas.find(area => area.nombre_area === this.data.nombre_area);
-          this.idArea = areaSeleccionada?.id_area || '';
+          this.id_area = areaSeleccionada?.id_area || '';
         }
       },
       (error) => {
@@ -50,9 +52,10 @@ export class CrearSolicitudComponent {
   guardar(): void {
     const solicitud = {
       id: this.data?.id, // Solo en modo edición
-      nombre_area: this.idArea,
+      id_area: this.id_area,
       jefe_area: this.nombreJefe,
-      solicitud_personal: this.solicitudPersonal
+      solicitud_personal: this.solicitudPersonal,
+      detalle_solicitud: this.detalleSolicitud,
     };
 
     if (this.data) {

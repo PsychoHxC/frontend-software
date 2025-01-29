@@ -27,4 +27,8 @@ export class GerenciaService {
   filtro(dato:any){
     return this.http.get(`${this.url}?control=filtro&dato=${dato}`)
   }
+
+  aprobadas() {
+    return this.http.get(`${this.url}?control=aprobadas`);
+  }
 }

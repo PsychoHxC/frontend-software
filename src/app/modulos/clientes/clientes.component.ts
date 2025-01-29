@@ -11,37 +11,22 @@ import { GerenciaService } from 'src/app/servicios/gerencia.service';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
 })
-export class ClientesComponent implements AfterViewInit {
+export class GerenciaComponent implements AfterViewInit {
 
   categoria:any;
 
   displayedColumns: string[] = [
     'select',
+    'idSolicitud',
     'numeroSolicitud',
     'area',
-    'tipoSolicitud',
+    'cargo',
     'fechaEjecucion',
-    'prioridad',
+    'fechaFinOferta',
     'acciones',
   ];
 
-  dataSource = new MatTableDataSource([
-    {
-      numeroSolicitud: '202361203361152',
-      area: 'JUZGADO 8',
-      tipoSolicitud: 'Remanentes',
-      fechaEjecucion: '2023-12-03',
-      prioridad: 'Alta',
-    },
-    {
-      numeroSolicitud: '202361203361153',
-      area: 'JUZGADO 9',
-      tipoSolicitud: 'Remanentes',
-      fechaEjecucion: '2023-12-05',
-      prioridad: 'Media',
-    },
-    // Agrega más elementos según sea necesario
-  ]);
+  dataSource = new MatTableDataSource<any>();
 
   selection: any[] = [];
 
@@ -52,15 +37,16 @@ export class ClientesComponent implements AfterViewInit {
   ) {}
 
 
-  ngOnInit(): void{
-    this.consulta()
+  ngOnInit(): void {
+    this.consultaAprobadas(); // Cargar registros aprobados al inicializar
   }
 
-  consulta(){
-    this.scate.consultar().subscribe((res:any)=>{
-
-      this.categoria =res;
-    })
+  consultaAprobadas() {
+    this.scate.aprobadas().subscribe((res: any) => {
+      // Asigna los datos devueltos al dataSource
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   ngAfterViewInit() {
@@ -92,19 +78,22 @@ export class ClientesComponent implements AfterViewInit {
     return this.selection.length > 0 && !this.isAllSelected();
   }
 
-  crearSolicitud() {
+  editarSolicitud(element: any) {
     const dialogRef = this.dialog.open(CrearOfertaComponent, {
       width: '75%',
       height: '75%',
-      data: { numeroSolicitud: '20240001' },
+      data: {...element},
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Nueva solicitud creada:', result);
+        console.log('Solicitud actualizada:', result);
+        // Aquí puedes agregar lógica para actualizar la tabla después de guardar.
+        this.consultaAprobadas();
       }
     });
   }
+  
 
   aprobarSolicitud() {
     if (this.selection.length === 0) {
@@ -115,11 +104,6 @@ export class ClientesComponent implements AfterViewInit {
     console.log('Aprobando registros seleccionados:', this.selection);
     // Lógica para procesar las solicitudes seleccionadas.
   }
-
-  accion1(element: any) {
-    console.log('Editar:', element);
-  }
-
    eliminar(id:number){
 
     Swal.fire({
@@ -136,7 +120,7 @@ export class ClientesComponent implements AfterViewInit {
 
         this.scate.eliminar(id).subscribe((resp:any) =>{
           if (resp['resultados']== 'OK'){
-            this.consulta();
+            this.consultaAprobadas();
           }
         })
 

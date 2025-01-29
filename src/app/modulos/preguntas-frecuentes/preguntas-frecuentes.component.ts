@@ -73,6 +73,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CrearSolicitudComponent } from './crear-solicitud/crear-solicitud.component';
 import { AreaService } from 'src/app/servicios/area.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NombreAreaService } from 'src/app/servicios/nombre-area';
 
 @Component({
   selector: 'app-preguntas-frecuentes',
@@ -84,11 +85,13 @@ export class AreaComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<any>();
   solicitudes: any[] = [];
   selection: any[] = [];
+  areas: any[] = []; 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public dialog: MatDialog, private areaService: AreaService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private nombreAreaService: NombreAreaService,
   ) {} 
 
   ngAfterViewInit() {

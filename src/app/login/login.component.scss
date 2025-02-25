@@ -1,0 +1,77 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #e67e22; /* Naranja */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid {
+    width: 100%;
+    height: 100vh;
+    background-color: #e67e22; /* Naranja */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background-color: #4b83eb;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-logo a {
+    color: #c55413;
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card {
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group-text {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    width: 100%;
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.icheck-primary label {
+    font-weight: normal;
+    font-size: 14px;
+}

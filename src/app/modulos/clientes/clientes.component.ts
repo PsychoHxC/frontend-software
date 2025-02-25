@@ -46,6 +46,7 @@ export class GerenciaComponent implements AfterViewInit {
       // Asigna los datos devueltos al dataSource
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
+      console.log('Veamos', res)
     });
   }
 

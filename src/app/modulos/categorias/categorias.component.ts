@@ -1,53 +1,66 @@
-
-
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { GerenciaService } from 'src/app/servicios/gerencia.service';
+// import { OfertaService } from 'src/app/servicios/oferta.service';
 import Swal from 'sweetalert2';
+import { OfertaService } from 'src/app/servicios/oferta.service';
+import { VerOfertaComponent } from './ver-oferta/ver-oferta.component';
+import { AplicarOfertaComponent } from './aplicar-oferta/aplicar-oferta.component';
 
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
-  styleUrls: ['./categorias.component.scss']
+  styleUrls: ['./categorias.component.scss'],
 })
-export class CategoriasComponent implements AfterViewInit {
-  // Columnas que se mostrarán en la tabla
-  displayedColumns: string[] = ['numero_oferta', 'nombre_oferta', 'fecha_fin_oferta', 'detalle_oferta', 'acciones'];
-  // Fuente de datos para la tabla
+export class OfertaComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = [
+    'id_solicitud',
+    'nombre_oferta',
+    'fecha_fin_oferta',
+    'acciones',
+  ];
   dataSource = new MatTableDataSource<any>();
-  // Referencia al paginador
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private gerenciaService: GerenciaService) {}
+  constructor(
+    private ofertaService: OfertaService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.cargarOfertas(); // Cargar las ofertas al inicializar el componente
+    this.cargarOfertas();
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator; // Conectar el paginador
+    this.dataSource.paginator = this.paginator;
   }
 
-  // Consultar las ofertas desde el servicio
+  // Obtener ofertas con estado = 1
   cargarOfertas(): void {
-
+    this.ofertaService.obtenerOfertasAprobadas().subscribe(
+      (data: any) => {
+        console.log(data, 'Veamos');
+        this.dataSource.data = data;
+      },
+      (error) => {
+        console.error('Error al cargar ofertas:', error);
+        Swal.fire('Error', 'No se pudieron cargar las ofertas.', 'error');
+      }
+    );
   }
 
-  // Crear una nueva oferta
-  nuevaOferta(): void {
-    Swal.fire('Nueva Oferta', 'Esta funcionalidad está en desarrollo.', 'info');
+  verOferta(oferta: any): void {
+    this.dialog.open(VerOfertaComponent, {
+      width: '400px',
+      data: { detalle_oferta: oferta.detalle_oferta }
+    });
   }
 
-  // Editar una oferta
-  editarOferta(){
-
-  }
-
-  // Eliminar una oferta
-  eliminarOferta(){
-
+  aplicarOferta(): void {
+    this.dialog.open(AplicarOfertaComponent, {
+      width: '500px'
+    });
   }
 }
-

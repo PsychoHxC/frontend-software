@@ -31,4 +31,9 @@ export class GerenciaService {
   aprobadas() {
     return this.http.get(`${this.url}?control=aprobadas`);
   }
+
+  aprobarOferta(id: number) {
+    return this.http.post(`${this.url}?control=aprobarOferta&id=${id}`, {});
+  }
+  
 }

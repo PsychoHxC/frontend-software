@@ -11,7 +11,7 @@ import { FooterComponent } from './estructura/footer/footer.component';
 import { PrincipalComponent } from './estructura/principal.component';
 import { DashboardComponent } from './modulos/dashboard/dashboard.component';
 import { GerenciaComponent } from './modulos/clientes/clientes.component';
-import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { OfertaComponent } from './modulos/categorias/categorias.component';
 import { PresentacionDePruebasComponent } from './modulos/presentacion-de-pruebas/presentacion-de-pruebas.component';
 import { ListadoDeElegiblesComponent } from './modulos/listado-de-elegibles/listado-de-elegibles.component';
 import { CapacitacionesComponent } from './modulos/capacitaciones/capacitaciones.component';
@@ -40,6 +40,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ConfirmDialogModule } from 'src/app/confirm-dialog/confirm-dialog.module';
+import { VerOfertaComponent } from './modulos/categorias/ver-oferta/ver-oferta.component';
+import { AplicarOfertaComponent } from './modulos/categorias/aplicar-oferta/aplicar-oferta.component';
+
 
 
 
@@ -54,7 +58,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     PrincipalComponent,
     DashboardComponent,
     GerenciaComponent,
-    CategoriasComponent,
     PresentacionDePruebasComponent,
     ListadoDeElegiblesComponent,
     CapacitacionesComponent,
@@ -65,6 +68,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NotFoundComponent,
     CrearSolicitudComponent,
     CrearOfertaComponent,
+    OfertaComponent,
+    VerOfertaComponent,
+    AplicarOfertaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -87,7 +94,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSortModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ConfirmDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

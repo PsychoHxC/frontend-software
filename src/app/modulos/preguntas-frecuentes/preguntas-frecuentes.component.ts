@@ -74,6 +74,7 @@ import { CrearSolicitudComponent } from './crear-solicitud/crear-solicitud.compo
 import { AreaService } from 'src/app/servicios/area.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NombreAreaService } from 'src/app/servicios/nombre-area';
+import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-preguntas-frecuentes',
@@ -119,22 +120,70 @@ cargarSolicitudes(): void {
   );
 }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(CrearSolicitudComponent);
+openDialog(): void {
+  const dialogRef = this.dialog.open(CrearSolicitudComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
+  dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
+      this.cargarSolicitudes(); // Recargar la tabla automáticamente
+      this.snackBar.open('Solicitud creada correctamente', 'Cerrar', { duration: 3000 });
+    }
+  });
+}
+
+  // aprobarSolicitudes(): void {
+  //   this.selection.forEach((solicitud: any) => {
+  //     const id = solicitud.id;
+  //     const idAprobacion = 1; // Ajusta este valor según corresponda
+      
+  //     this.areaService.aprobarSolicitud(id, idAprobacion).subscribe(
+  //       (response: any) => {
+  //         if (response.resultado === 'OK') {
+  //           // Actualizar localmente la solicitud aprobada
+  //           const index = this.solicitudes.findIndex((s) => s.id === id);
+  //           if (index !== -1) {
+  //             this.solicitudes[index].id_aprobacion = idAprobacion;
+  //             this.dataSource.data = this.solicitudes.slice(); // Forzar actualización
+  //           }
+  //         } else {
+  //           console.error('Error al aprobar la solicitud:', response.mensaje);
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error('Error en la solicitud de aprobación:', error);
+  //       }
+  //     );
+  //   });
+  
+  //   // Limpiar selección después de aprobar
+  //   this.selection = [];
+  // }
+
+
+  aprobarSolicitudes(): void {
+    if (this.selection.length === 0) {
+      console.warn("No hay solicitudes seleccionadas para aprobar.");
+      return;
+    }
+  
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: '¿Está seguro de aprobar las solicitudes seleccionadas?' }
+    });
+  
+    confirmDialog.afterClosed().subscribe(result => {
       if (result) {
-        this.solicitudes.push(result);
-        this.dataSource.data = this.solicitudes;
+        this.procesarAprobaciones();
       }
     });
   }
-
-  aprobarSolicitudes(): void {
+  
+  private procesarAprobaciones(): void {
+    const idAprobacion = 1; // Ajusta este valor según corresponda
+  
     this.selection.forEach((solicitud: any) => {
       const id = solicitud.id;
-      const idAprobacion = 1; // Ajusta este valor según corresponda
-      
+  
       this.areaService.aprobarSolicitud(id, idAprobacion).subscribe(
         (response: any) => {
           if (response.resultado === 'OK') {
@@ -157,6 +206,7 @@ cargarSolicitudes(): void {
     // Limpiar selección después de aprobar
     this.selection = [];
   }
+  
   
 
   seleccionarTodos(event: any): void {

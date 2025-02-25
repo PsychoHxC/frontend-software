@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './estructura/principal.component';
 import { DashboardComponent } from './modulos/dashboard/dashboard.component';
 import { GerenciaComponent } from './modulos/clientes/clientes.component';
-import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { OfertaComponent } from './modulos/categorias/categorias.component';
 import { PresentacionDePruebasComponent } from './modulos/presentacion-de-pruebas/presentacion-de-pruebas.component';
 import { ListadoDeElegiblesComponent } from './modulos/listado-de-elegibles/listado-de-elegibles.component';
 import { CapacitacionesComponent } from './modulos/capacitaciones/capacitaciones.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate:[validaruserGuard] },
       { path: 'Clientes', component: GerenciaComponent, canActivate:[validaruserGuard] },
-      { path: 'Categorías', component: CategoriasComponent, canActivate:[validaruserGuard] },
+      { path: 'Categorías', component: OfertaComponent, canActivate:[validaruserGuard] },
       { path: 'Presentación de pruebas',component: PresentacionDePruebasComponent, canActivate:[validaruserGuard]},
       { path: 'Listado de elegíbles', component: ListadoDeElegiblesComponent, canActivate:[validaruserGuard] },
       { path: 'Capacitaciones', component: CapacitacionesComponent, canActivate:[validaruserGuard] },

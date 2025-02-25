@@ -1,35 +1,35 @@
 <h2 mat-dialog-title>Crear Solicitud</h2>
 
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Nombre Área</mat-label>
-    <mat-select [(value)]="id_area">
-      <mat-option *ngFor="let area of listaAreas" [value]="area.id_area">
-        {{ area.nombre_area }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="form-container">
+    <mat-form-field>
+      <mat-label>Nombre Área</mat-label>
+      <mat-select [(value)]="id_area">
+        <mat-option *ngFor="let area of listaAreas" [value]="area.id_area">
+          {{ area.nombre_area }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Nombre Jefe de Área</mat-label>
+      <input matInput [(ngModel)]="nombreJefe" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Solicitud Personal</mat-label>
+      <input matInput [(ngModel)]="solicitudPersonal" />
+    </mat-form-field>
+  </div>
 
-  <mat-form-field>
-    <mat-label>Nombre Jefe de Área</mat-label>
-    <input matInput [(ngModel)]="nombreJefe" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Solicitud Personal</mat-label>
-    <textarea matInput [(ngModel)]="solicitudPersonal"></textarea>
-  </mat-form-field>
-
-  <mat-form-field>
+  <mat-form-field class="full-width">
     <mat-label>Detalle Solicitud</mat-label>
     <textarea matInput [(ngModel)]="detalleSolicitud"></textarea>
     <mat-hint align="end">{{ detalleSolicitud?.length || 0 }}/1000</mat-hint>
   </mat-form-field>
 </mat-dialog-content>
 
-
-
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button mat-button (click)="cancelar()">Cancelar</button>
-  <button mat-button (click)="guardar()">Guardar</button>
+  <button mat-button (click)="confirmarGuardado()">Guardar</button>
 </mat-dialog-actions>

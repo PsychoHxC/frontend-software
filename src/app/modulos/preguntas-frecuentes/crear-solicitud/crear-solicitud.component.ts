@@ -16,7 +16,8 @@ export class CrearSolicitudComponent {
   id_area?: string;
   nombreJefe: string;
   solicitudPersonal: string;
-  detalleSolicitud: string;
+  // detalleSolicitud: string;
+  detalleSolicitud: string = '';
 
   listaAreas: any[] = [];
 

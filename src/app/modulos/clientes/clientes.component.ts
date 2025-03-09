@@ -3,7 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearOfertaComponent } from './crear-oferta/crear-oferta.component';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { GerenciaService } from 'src/app/servicios/gerencia.service';
 
 @Component({

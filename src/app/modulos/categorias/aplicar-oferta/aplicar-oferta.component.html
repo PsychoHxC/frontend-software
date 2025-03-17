@@ -1,44 +1,62 @@
 <h2 mat-dialog-title>Aplicar a la Oferta</h2>
 <mat-dialog-content>
   <form [formGroup]="formulario">
-    <mat-form-field appearance="outline">
-      <mat-label>Tipo de Identificación</mat-label>
-      <input matInput formControlName="tipo_identificacion">
-    </mat-form-field>
+    <div class="grid-container">
+      <!-- Tipo de Identificación (Select) -->
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Identificación</mat-label>
+        <mat-select formControlName="tipo_identificacion">
+          <mat-option value="CC">Cédula</mat-option>
+          <mat-option value="CE">Cédula de Extranjería</mat-option>
+          <mat-option value="PAS">Pasaporte</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Número de Identificación</mat-label>
-      <input matInput type="number" formControlName="numero_identificacion">
-    </mat-form-field>
+      <!-- Número de Identificación (Input sin botones) -->
+      <mat-form-field appearance="outline">
+        <mat-label>Número de Identificación</mat-label>
+        <input matInput type="text" formControlName="numero_identificacion">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre">
-    </mat-form-field>
+      <!-- Nombre -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Apellidos</mat-label>
-      <input matInput formControlName="apellidos">
-    </mat-form-field>
+      <!-- Apellidos -->
+      <mat-form-field appearance="outline">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellidos">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Celular</mat-label>
-      <input matInput type="number" formControlName="celular">
-    </mat-form-field>
+      <!-- Celular (Input sin botones) -->
+      <mat-form-field appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput type="text" formControlName="celular">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Dirección</mat-label>
-      <input matInput formControlName="direccion">
-    </mat-form-field>
+      <!-- Dirección -->
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" formControlName="email">
-    </mat-form-field>
+      <!-- Email -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+      </mat-form-field>
 
-    <!-- Quitar mat-form-field del input file -->
-    <label>Subir CV (PDF)</label>
-    <input type="file" (change)="onArchivoSeleccionado($event)" accept="application/pdf">
+      <!-- Subir CV (fuera de mat-form-field para evitar problemas) -->
+      <div class="file-input-container">
+        <label>Subir CV (PDF)</label>
+        <input type="file" (change)="onArchivoSeleccionado($event)" accept="application/pdf">
+        <div *ngIf="base64PDF" class="preview">
+          <p>Archivo cargado correctamente.</p>
+        </div>
+      </div>
+    </div>
   </form>
 </mat-dialog-content>
 

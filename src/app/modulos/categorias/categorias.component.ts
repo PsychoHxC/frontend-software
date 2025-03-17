@@ -58,9 +58,11 @@ export class OfertaComponent implements OnInit, AfterViewInit {
     });
   }
 
-  aplicarOferta(): void {
+  aplicarOferta(oferta: any): void {
     this.dialog.open(AplicarOfertaComponent, {
-      width: '500px'
+      width: '50%',
+      height: '75%',
+      data:{id_solicitud: oferta.id_solicitud}
     });
   }
 }

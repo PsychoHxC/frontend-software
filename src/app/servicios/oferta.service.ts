@@ -5,12 +5,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OfertaService {
+  url = 'http://localhost/talentlink-contratacion/backend-talentlink-contratacion/controlador/oferta.php';
 
-  url ='http://localhost/talentlink-contratacion/backend-talentlink-contratacion/controlador/oferta.php';
-
-  constructor (private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   obtenerOfertasAprobadas() {
     return this.http.get(`${this.url}?control=consulta`);
+  }
+
+  postularCandidato(data: any) {
+    return this.http.post(`${this.url}?control=insertarPostulacion`, data);
   }
 }

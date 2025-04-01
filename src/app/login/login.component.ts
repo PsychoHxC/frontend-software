@@ -58,6 +58,11 @@ export class LoginComponent {
       });
     }
   }
+
+
+  abrirRegistro() {
+    this.router.navigate(['/registro']); // Asegúrate de tener una ruta /registro
+  }
   
 
 

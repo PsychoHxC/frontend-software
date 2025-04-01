@@ -43,6 +43,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmDialogModule } from 'src/app/confirm-dialog/confirm-dialog.module';
 import { VerOfertaComponent } from './modulos/categorias/ver-oferta/ver-oferta.component';
 import { AplicarOfertaComponent } from './modulos/categorias/aplicar-oferta/aplicar-oferta.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 
@@ -70,7 +71,8 @@ import { AplicarOfertaComponent } from './modulos/categorias/aplicar-oferta/apli
     CrearOfertaComponent,
     OfertaComponent,
     VerOfertaComponent,
-    AplicarOfertaComponent
+    AplicarOfertaComponent,
+    RegistroComponent
     
   ],
   imports: [

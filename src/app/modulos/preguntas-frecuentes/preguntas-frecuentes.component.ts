@@ -115,7 +115,7 @@ cargarSolicitudes(): void {
     },
     (error) => {
       console.error('Error al cargar las solicitudes:', error);
-      this.isLoading = false; // Detener el indicador incluso en caso de error
+      this.isLoading = false; 
     }
   );
 }
@@ -242,15 +242,16 @@ openDialog(): void {
   }
 
   editarSolicitud(element: any): void {
+    console.log('Elemento enviado al modal:', element); 
     const dialogRef = this.dialog.open(CrearSolicitudComponent, {
       width: '75%',
       height: '75%',
-      data: { ...element } // Pasamos los datos completos del registro al modal
+      data: { ...element } 
     });
+    
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Actualiza la solicitud en la lista local y refresca la tabla
         const index = this.solicitudes.findIndex((s) => s.id === element.id);
         if (index !== -1) {
           this.solicitudes[index] = result;

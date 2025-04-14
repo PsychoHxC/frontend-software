@@ -24,12 +24,11 @@ export class CrearSolicitudComponent {
   constructor(
     public dialogRef: MatDialogRef<CrearSolicitudComponent>,
     private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, // Datos recibidos del componente principal
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private areaService: AreaService,
     private nombreAreaService: NombreAreaService) {
 
-    // Si hay datos (modo edición), precarga los valores
-    //this.idArea = data?.nombre_area || '';
+
     this.nombreJefe = data?.jefe_area || '';
     this.solicitudPersonal = data?.solicitud_personal || '';
     this.detalleSolicitud = data?.detalle_solicitud || '';
@@ -37,10 +36,9 @@ export class CrearSolicitudComponent {
   }
 
   ngOnInit(): void {
-    // Cargar las áreas al iniciar el componente
     this.nombreAreaService.consultarAreas().subscribe(
       (data: any) => {
-        this.listaAreas = data; // Asignar las áreas a la lista
+        this.listaAreas = data; 
 
         if (this.data?.nombre_area){
 
@@ -53,38 +51,6 @@ export class CrearSolicitudComponent {
       }
     );
   }
-
-  // guardar(): void {
-  //   const solicitud = {
-  //     id: this.data?.id, // Solo en modo edición
-  //     id_area: this.id_area,
-  //     jefe_area: this.nombreJefe,
-  //     solicitud_personal: this.solicitudPersonal,
-  //     detalle_solicitud: this.detalleSolicitud,
-  //   };
-
-  //   if (this.data) {
-  //     // Modo edición
-  //     this.areaService.editar(this.data.id, solicitud).subscribe(
-  //       () => {
-  //         this.dialogRef.close(solicitud); // Cierra el modal y envía los datos actualizados
-  //       },
-  //       (error) => {
-  //         console.error('Error al actualizar la solicitud:', error);
-  //       }
-  //     );
-  //   } else {
-  //     // Modo creación
-  //     this.areaService.insertar(solicitud).subscribe(
-  //       (response) => {
-  //         this.dialogRef.close(response); // Cierra el modal y envía la nueva solicitud
-  //       },
-  //       (error) => {
-  //         console.error('Error al crear la solicitud:', error);
-  //       }
-  //     );
-  //   }
-  // }
 
   guardar(): void {
     const solicitud = {
@@ -101,7 +67,7 @@ export class CrearSolicitudComponent {
   
     serviceCall.subscribe(
       (response) => {
-        this.dialogRef.close(true); // Cierra el modal y envía un valor para indicar éxito
+        this.dialogRef.close(true); 
       },
       (error) => {
         console.error('Error al guardar la solicitud:', error);

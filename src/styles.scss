@@ -37,3 +37,35 @@ $Talenlink-Contratacion-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Responsividad general para mat-table en todo el proyecto
+.mat-table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  min-width: 600px; // ajusta según tus columnas típicas
+}
+
+// Ajustes para header y celdas en pantallas pequeñas
+@media (max-width: 768px) {
+  .mat-header-cell,
+  .mat-cell {
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+  }
+
+  .mat-header-row,
+  .mat-row {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+  }
+}
+
+.table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
